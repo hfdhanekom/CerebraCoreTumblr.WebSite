@@ -19,6 +19,8 @@ namespace TumblrSync
         static tAccount CurrentAccount;
         static string drive;
         static string AccountFolder;
+
+
         static void Main(string[] args)
         {
 
@@ -27,28 +29,44 @@ namespace TumblrSync
             Console.WriteLine("**********************************");
             Console.WriteLine("************* 2016 ***************");
             Console.WriteLine("**********************************");
-            Console.WriteLine("Commands Avalible");
-            Console.WriteLine(" ");
-            Console.WriteLine(" Start     - Starts the sync.");
-            Console.WriteLine(" Stop      - Stops the sync.");
-            Console.WriteLine(" Exit      - Exits the application.");
-            Console.WriteLine(" Config    - Opens the configuration screen.");
-            Console.WriteLine(" Add       - [add,[blogname]] adds a new blog for syncing.");
-            Console.WriteLine(" chkupdate - Checks if any of the blogs have updates and if so it setts the do sync to true.");
-            Console.WriteLine("");
-            Console.WriteLine("***********************************");
-            Console.WriteLine("What would you like to do?");
+            
 
 
             drive = ConfigurationManager.AppSettings["SysDir"];
-            //GetFirstBlogToSync Form DataBase
-
-
             bool Noted = false;
-
-            //Update Blog
             bool exit = false;
             bool DoSync = false;
+
+            do
+            {
+                Console.WriteLine("Checking Database Connection...Please wait...");
+                if (Global.DBConnected)
+                {
+                    Console.WriteLine("Connected to Database.");
+                    exit = false;
+                    DoSync = false;
+                    Noted = false;
+                    break;
+                }
+                else
+                {
+                    if (MessageBox.Show("Connecting to Database Failed: Would you like to Exit?", "Error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        exit = true;
+                        break;
+                    }
+                    else
+                    {
+                        frmConfiguration configure = new frmConfiguration();
+                        configure.ShowDialog();
+                    }
+                }
+            } while (true);
+
+
+           
+
+            
             while (!exit)
             {
                 try
@@ -58,6 +76,22 @@ namespace TumblrSync
                     CurrentAccount.AccountSystemPath = drive + "\\" + CurrentAccount.username;
                     AccountFolder = CurrentAccount.AccountSystemPath;
                     SyncingBlog = Global.mod.tBlogs.Where(ep => ep.DoSync == "true").FirstOrDefault();
+
+                    if (!Noted)
+                    {
+                        Console.WriteLine("Commands Avalible");
+                        Console.WriteLine(" ");
+                        Console.WriteLine(" Start     - Starts the sync.");
+                        Console.WriteLine(" Stop      - Stops the sync.");
+                        Console.WriteLine(" Exit      - Exits the application.");
+                        Console.WriteLine(" Config    - Opens the configuration screen.");
+                        Console.WriteLine(" Add       - [add,[blogname]] adds a new blog for syncing.");
+                        Console.WriteLine(" chkupdate - Checks if any of the blogs have updates and if so it setts the do sync to true.");
+                        Console.WriteLine("");
+                        Console.WriteLine("***********************************");
+                        Console.WriteLine("What would you like to do?");
+                    }
+
                     if (DoSync)
                     {
                         if (SyncingBlog != null)
@@ -154,6 +188,8 @@ namespace TumblrSync
 
         }
 
+
+
         static void Process(tBlog blog)
         {
             blog.BlogSystemPath = CurrentAccount.AccountSystemPath + "\\" + blog.BlogName;
@@ -171,83 +207,118 @@ namespace TumblrSync
                 }
             }
         }
+
+        
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     static class Global
     {
-        public static TumblrModel mod = new TumblrModel();
+       public static TumblrModel mod = new TumblrModel();
 
-        public static jsRootObject ToJson(string BlogName, string ConsumerKey, int Limit, int Offset)
-        {
-            String RequestURL = "http://api.tumblr.com/v2/blog/" + BlogName + ".tumblr.com/posts?api_key=" + ConsumerKey + "&offset=[offset]&limit=[limit]";
-            var Url1 = RequestURL;
-            String ProString = Global.DoRequest(Url1.Replace("[offset]", Offset.ToString()).Replace("[limit]", Limit.ToString()));
+       public static Boolean DBConnected
+       {
+           get
+           {
+               try
+               {
+                   mod.Database.Connection.Open();
+                   mod.Database.Connection.Close();
+                   return true;
+               }
+               catch
+               {
+                   return false;
+               }
+           }
+       }
 
-
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(jsRootObject));
-            jsRootObject obj = null;
-            using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(ProString)))
-            {
-                obj = (jsRootObject)ser.ReadObject(stream);
-            }
-            return obj;
-        }
-
-        public static String DoRequest(String URL)
-        {
-            HttpWebRequest Request;
-            Request = (HttpWebRequest)WebRequest.Create(URL);
-            Request.Method = "GET";
-            Request.Timeout = 15000;
-            HttpWebResponse response = (HttpWebResponse)Request.GetResponse();
-            String result = "";
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-            {
-                result = reader.ReadToEnd();
-            }
-            String ProString = "";
-            foreach (String xs in result.Split(','))
-            {
-                if (xs.Contains("\"player\""))
-                {
-                    if (!xs.Contains("\"width\""))
-                    {
-                        ProString += xs.Replace("\"player\"", "\"xplayer\"") + ",";
-                        continue;
-                    }
-                }
-
-                ProString += xs + ",";
-            }
-            ProString = ProString.Substring(0, ProString.Length - 1);
-            return ProString;
-        }
+       public static jsRootObject ToJson(string BlogName, string ConsumerKey, int Limit, int Offset)
+       {
+           String RequestURL = "http://api.tumblr.com/v2/blog/" + BlogName + ".tumblr.com/posts?api_key=" + ConsumerKey + "&offset=[offset]&limit=[limit]";
+           var Url1 = RequestURL;
+           String ProString = Global.DoRequest(Url1.Replace("[offset]", Offset.ToString()).Replace("[limit]", Limit.ToString()));
 
 
+           DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(jsRootObject));
+           jsRootObject obj = null;
+           using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(ProString)))
+           {
+               obj = (jsRootObject)ser.ReadObject(stream);
+           }
+           return obj;
+       }
 
-        public static TumblrTag getTag(String name)
-        {
-            return mod.TumblrTags.Where(ep => ep.name == name).FirstOrDefault() ?? new TumblrTag { id = -1, name = name };
-        }
+       public static String DoRequest(String URL)
+       {
+           HttpWebRequest Request;
+           Request = (HttpWebRequest)WebRequest.Create(URL);
+           Request.Method = "GET";
+           Request.Timeout = 15000;
+           HttpWebResponse response = (HttpWebResponse)Request.GetResponse();
+           String result = "";
+           using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+           {
+               result = reader.ReadToEnd();
+           }
+           String ProString = "";
+           foreach (String xs in result.Split(','))
+           {
+               if (xs.Contains("\"player\""))
+               {
+                   if (!xs.Contains("\"width\""))
+                   {
+                       ProString += xs.Replace("\"player\"", "\"xplayer\"") + ",";
+                       continue;
+                   }
+               }
 
-        public static tBlog newBlog(jsRootObject jsobj, tAccount currentaccount)
-        {
-            tBlog newB = mod.tBlogs.Where(ep => ep.BlogName == jsobj.response.blog.name).FirstOrDefault() ?? new tBlog { id = -1 };
-            if (newB.id > -1)
-            {
-                newB.BlogName = jsobj.response.blog.name;
-                newB.DoSync = "true";
-                newB.Limit = 10;
-                newB.Offset = jsobj.response.blog.posts;
-                newB.RequestURL = "";
-                newB.Synced = 0;
-                newB.tAccountID = currentaccount.id;
-                newB.Total = jsobj.response.blog.posts;
-                newB.BlogSystemPath = currentaccount.AccountSystemPath + "\\" + newB.BlogName;
-                newB.BlogWebPath = "";
-            }
-            return newB;
-        }
+               ProString += xs + ",";
+           }
+           ProString = ProString.Substring(0, ProString.Length - 1);
+           return ProString;
+       }
+
+
+
+       public static TumblrTag getTag(String name)
+       {
+           return mod.TumblrTags.Where(ep => ep.name == name).FirstOrDefault() ?? new TumblrTag { id = -1, name = name };
+       }
+
+       public static tBlog newBlog(jsRootObject jsobj, tAccount currentaccount)
+       {
+           tBlog newB = mod.tBlogs.Where(ep => ep.BlogName == jsobj.response.blog.name).FirstOrDefault() ?? new tBlog { id = -1 };
+           if (newB.id > -1)
+           {
+               newB.BlogName = jsobj.response.blog.name;
+               newB.DoSync = "true";
+               newB.Limit = 10;
+               newB.Offset = jsobj.response.blog.posts;
+               newB.RequestURL = "";
+               newB.Synced = 0;
+               newB.tAccountID = currentaccount.id;
+               newB.Total = jsobj.response.blog.posts;
+               newB.BlogSystemPath = currentaccount.AccountSystemPath + "\\" + newB.BlogName;
+               newB.BlogWebPath = "";
+           }
+           return newB;
+       }
     }
 
 }

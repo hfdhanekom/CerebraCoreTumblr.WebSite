@@ -3,3 +3,6 @@ C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Da
 C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.DataAccess\obj\Debug\CerebraCoreTumblr.DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.DataAccess\obj\Debug\CerebraCoreTumblr.DataAccess.dll
 C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.DataAccess\obj\Debug\CerebraCoreTumblr.DataAccess.pdb
+C:\Users\Hendrik\Documents\GitHub\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.DataAccess\obj\Debug\CerebraCoreTumblr.DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Hendrik\Documents\GitHub\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.DataAccess\obj\Debug\CerebraCoreTumblr.DataAccess.dll
+C:\Users\Hendrik\Documents\GitHub\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.DataAccess\obj\Debug\CerebraCoreTumblr.DataAccess.pdb
