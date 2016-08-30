@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerebraCoreTumblr.WebSite", "CerebraCoreTumblr.WebSite\CerebraCoreTumblr.WebSite.csproj", "{358687F3-C1F0-4CFC-89B6-ABC74F403919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerebraCoreTumblr.Test", "CerebraCoreTumblr.Test\CerebraCoreTumblr.Test.csproj", "{0701AF23-4100-4D84-85AA-4165DFCE1454}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerebraCoreTumblr.DataAccess", "CerebraCoreTumblr.DataAccess\CerebraCoreTumblr.DataAccess.csproj", "{720B5404-A07B-49AB-BA8A-EEE151129E42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerebraCoreTumblr.Service.Web", "CerebraCoreTumblr.Service.Web\CerebraCoreTumblr.Service.Web.csproj", "{B37701D8-FB97-48C4-B877-F92D22C6E9A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerebraCoreTumblr.Service.Win", "CerebraCoreTumblr.Service.Win\CerebraCoreTumblr.Service.Win.csproj", "{5FC0BBDA-B6F9-43E0-95A4-F80C807C09B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TumblrSync", "..\..\TMB\TumblrSync\TumblrSync.csproj", "{A44501D6-B26C-4FC2-B746-217847833BB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{358687F3-C1F0-4CFC-89B6-ABC74F403919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358687F3-C1F0-4CFC-89B6-ABC74F403919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358687F3-C1F0-4CFC-89B6-ABC74F403919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358687F3-C1F0-4CFC-89B6-ABC74F403919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0701AF23-4100-4D84-85AA-4165DFCE1454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0701AF23-4100-4D84-85AA-4165DFCE1454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0701AF23-4100-4D84-85AA-4165DFCE1454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0701AF23-4100-4D84-85AA-4165DFCE1454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{720B5404-A07B-49AB-BA8A-EEE151129E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720B5404-A07B-49AB-BA8A-EEE151129E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720B5404-A07B-49AB-BA8A-EEE151129E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720B5404-A07B-49AB-BA8A-EEE151129E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B37701D8-FB97-48C4-B877-F92D22C6E9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37701D8-FB97-48C4-B877-F92D22C6E9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37701D8-FB97-48C4-B877-F92D22C6E9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37701D8-FB97-48C4-B877-F92D22C6E9A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC0BBDA-B6F9-43E0-95A4-F80C807C09B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC0BBDA-B6F9-43E0-95A4-F80C807C09B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC0BBDA-B6F9-43E0-95A4-F80C807C09B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC0BBDA-B6F9-43E0-95A4-F80C807C09B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A44501D6-B26C-4FC2-B746-217847833BB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A44501D6-B26C-4FC2-B746-217847833BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A44501D6-B26C-4FC2-B746-217847833BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A44501D6-B26C-4FC2-B746-217847833BB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

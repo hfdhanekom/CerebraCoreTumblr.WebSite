@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{720B5404-A07B-49AB-BA8A-EEE151129E42}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CerebraCoreTumblr.DataAccess</RootNamespace>
+    <AssemblyName>CerebraCoreTumblr.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\Download.cs" />
+    <Compile Include="Controller\TumblrAccount.cs" />
+    <Compile Include="Controller\TumblrBlog.cs" />
+    <Compile Include="Controller\TumblrPost.cs" />
+    <Compile Include="DTO\Download.cs" />
+    <Compile Include="DTO\TumblrAccount.cs" />
+    <Compile Include="DTO\TumblrBlog.cs" />
+    <Compile Include="DTO\TumblrPost.cs" />
+    <Compile Include="DTO\TumblrTag.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="Interface\IDownload.cs" />
+    <Compile Include="Interface\ITumblrAccount.cs" />
+    <Compile Include="Interface\ITumblrBlog.cs" />
+    <Compile Include="Interface\ITumblrPost.cs" />
+    <Compile Include="Json\jsAltSize.cs" />
+    <Compile Include="Json\jsBlog.cs" />
+    <Compile Include="Json\jsBlog2.cs" />
+    <Compile Include="Json\jsBlogs.cs" />
+    <Compile Include="Json\jsExif.cs" />
+    <Compile Include="Json\jsMeta.cs" />
+    <Compile Include="Json\jsOriginalSize.cs" />
+    <Compile Include="Json\jsPhoto.cs" />
+    <Compile Include="Json\jsPlayer.cs" />
+    <Compile Include="Json\jsPost.cs" />
+    <Compile Include="Json\jsPost2.cs" />
+    <Compile Include="Json\jsReblog.cs" />
+    <Compile Include="Json\jsResponse.cs" />
+    <Compile Include="Json\jsRootObject.cs" />
+    <Compile Include="Json\jsTheme.cs" />
+    <Compile Include="Json\jsTrail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Constant\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,6 @@
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Win\bin\Debug\CerebraCoreTumblr.Service.Win.exe.config
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Win\bin\Debug\CerebraCoreTumblr.Service.Win.exe
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Win\bin\Debug\CerebraCoreTumblr.Service.Win.pdb
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Win\obj\Debug\CerebraCoreTumblr.Service.Win.csprojResolveAssemblyReference.cache
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Win\obj\Debug\CerebraCoreTumblr.Service.Win.exe
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Win\obj\Debug\CerebraCoreTumblr.Service.Win.pdb

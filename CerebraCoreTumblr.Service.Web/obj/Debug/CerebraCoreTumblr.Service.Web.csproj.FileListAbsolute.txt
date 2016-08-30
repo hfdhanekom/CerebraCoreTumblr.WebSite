@@ -1,0 +1,5 @@
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Web\bin\CerebraCoreTumblr.Service.Web.dll
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Web\bin\CerebraCoreTumblr.Service.Web.pdb
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Web\obj\Debug\CerebraCoreTumblr.Service.Web.csprojResolveAssemblyReference.cache
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Web\obj\Debug\CerebraCoreTumblr.Service.Web.dll
+C:\Users\Hendrik\Desktop\ToServer\CerebraCoreTumblr.WebSite\CerebraCoreTumblr.Service.Web\obj\Debug\CerebraCoreTumblr.Service.Web.pdb
