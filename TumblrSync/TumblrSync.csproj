@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A44501D6-B26C-4FC2-B746-217847833BB8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TumblrSync</RootNamespace>
+    <AssemblyName>TumblrSync</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="custom\ConnectionTools.cs" />
+    <Compile Include="custom\tBlog.cs" />
+    <Compile Include="custom\TumblrBlog.cs" />
+    <Compile Include="frmConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfiguration.Designer.cs">
+      <DependentUpon>frmConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Jason\jsAltSize.cs" />
+    <Compile Include="Jason\jsBlog.cs" />
+    <Compile Include="Jason\jsBlog2.cs" />
+    <Compile Include="Jason\jsBlogs.cs" />
+    <Compile Include="Jason\jsExif.cs" />
+    <Compile Include="Jason\jsMeta.cs" />
+    <Compile Include="Jason\jsOriginalSize.cs" />
+    <Compile Include="Jason\jsPhoto.cs" />
+    <Compile Include="Jason\jsPlayer.cs" />
+    <Compile Include="Jason\jsPost.cs" />
+    <Compile Include="Jason\jsPost2.cs" />
+    <Compile Include="Jason\jsReblog.cs" />
+    <Compile Include="Jason\jsResponse.cs" />
+    <Compile Include="Jason\jsRootObject.cs" />
+    <Compile Include="Jason\jsTheme.cs" />
+    <Compile Include="Jason\jsTrail.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tAccount.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tBlog.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tDownload.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrAltSize.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrBlog.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TumblrModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TumblrModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrOriginalSize.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrPhoto.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrPlayer.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrPost.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrPostComment.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrPostOtherMedia.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrReblog.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TumblrTag.cs">
+      <DependentUpon>TumblrModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="TumblrModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TumblrModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TumblrModel.edmx.diagram">
+      <DependentUpon>TumblrModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TumblrModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TumblrModel.edmx</DependentUpon>
+      <LastGenOutput>TumblrModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TumblrModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TumblrModel.edmx</DependentUpon>
+      <LastGenOutput>TumblrModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmConfiguration.resx">
+      <DependentUpon>frmConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

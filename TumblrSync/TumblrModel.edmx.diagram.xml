@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="555ab4d5a95a4b5da7af5d086359960f" Name="Diagram1" ZoomLevel="32">
+        <EntityTypeShape EntityType="Tumblr.Model.tAccount" Width="1.5" PointX="7.375" PointY="16.875" />
+        <EntityTypeShape EntityType="Tumblr.Model.tBlog" Width="1.5" PointX="11" PointY="14.625" />
+        <EntityTypeShape EntityType="Tumblr.Model.tDownload" Width="1.5" PointX="4.125" PointY="19" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrAltSize" Width="1.5" PointX="11.606813208948267" PointY="10.315092866455714" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrBlog" Width="1.5" PointX="2.375" PointY="8.125" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrOriginalSize" Width="1.5" PointX="1.875" PointY="5.625" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPhoto" Width="1.5" PointX="7" PointY="5.75" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPlayer" Width="1.5" PointX="4.375" PointY="17.375" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPost" Width="1.5" PointX="6" PointY="11.25" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPostComment" Width="1.5" PointX="9.6141930621183445" PointY="2.9298581494623135" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPostOtherMedia" Width="1.5" PointX="5.26360414422285" PointY="2.6385158610709549" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrReblog" Width="1.5" PointX="10.726290363225289" PointY="0.45598723015561105" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrTag" Width="1.5" PointX="1" PointY="4.625" />
+        <AssociationConnector Association="Tumblr.Model.FK_tBlog_tAccount" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbAltSize_tbPhotos" />
+        <AssociationConnector Association="Tumblr.Model.FK_TumblrPost_TumblrBlogs" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbOriginalSize_tbPhotos" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbPhotos_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbPlayer_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbComments_Posts" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbPostOtherMedia_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbReblogs_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.TumblrPostTags" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

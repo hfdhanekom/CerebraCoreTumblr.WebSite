@@ -1,0 +1,1036 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Tumblr.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TumblrModelStoreContainer">
+          <EntitySet Name="tAccount" EntityType="Tumblr.Model.Store.tAccount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tBlog" EntityType="Tumblr.Model.Store.tBlog" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tDownload" EntityType="Tumblr.Model.Store.tDownload" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrAltSize" EntityType="Tumblr.Model.Store.TumblrAltSize" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrBlogs" EntityType="Tumblr.Model.Store.TumblrBlogs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrOriginalSize" EntityType="Tumblr.Model.Store.TumblrOriginalSize" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrPhotos" EntityType="Tumblr.Model.Store.TumblrPhotos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrPlayer" EntityType="Tumblr.Model.Store.TumblrPlayer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrPost" EntityType="Tumblr.Model.Store.TumblrPost" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrPostComments" EntityType="Tumblr.Model.Store.TumblrPostComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrPostOtherMedia" EntityType="Tumblr.Model.Store.TumblrPostOtherMedia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrPostTags" EntityType="Tumblr.Model.Store.TumblrPostTags" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrReblogs" EntityType="Tumblr.Model.Store.TumblrReblogs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrTags" EntityType="Tumblr.Model.Store.TumblrTags" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_tbAltSize_tbPhotos" Association="Tumblr.Model.Store.FK_tbAltSize_tbPhotos">
+            <End Role="TumblrPhotos" EntitySet="TumblrPhotos" />
+            <End Role="TumblrAltSize" EntitySet="TumblrAltSize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbComments_Posts" Association="Tumblr.Model.Store.FK_tbComments_Posts">
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+            <End Role="TumblrPostComments" EntitySet="TumblrPostComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBlog_tAccount" Association="Tumblr.Model.Store.FK_tBlog_tAccount">
+            <End Role="tAccount" EntitySet="tAccount" />
+            <End Role="tBlog" EntitySet="tBlog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbOriginalSize_tbPhotos" Association="Tumblr.Model.Store.FK_tbOriginalSize_tbPhotos">
+            <End Role="TumblrPhotos" EntitySet="TumblrPhotos" />
+            <End Role="TumblrOriginalSize" EntitySet="TumblrOriginalSize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPhotos_tbPost" Association="Tumblr.Model.Store.FK_tbPhotos_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+            <End Role="TumblrPhotos" EntitySet="TumblrPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPlayer_tbPost" Association="Tumblr.Model.Store.FK_tbPlayer_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+            <End Role="TumblrPlayer" EntitySet="TumblrPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPostOtherMedia_tbPost" Association="Tumblr.Model.Store.FK_tbPostOtherMedia_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+            <End Role="TumblrPostOtherMedia" EntitySet="TumblrPostOtherMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPostTags_Posts" Association="Tumblr.Model.Store.FK_tbPostTags_Posts">
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+            <End Role="TumblrPostTags" EntitySet="TumblrPostTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPostTags_Tags" Association="Tumblr.Model.Store.FK_tbPostTags_Tags">
+            <End Role="TumblrTags" EntitySet="TumblrTags" />
+            <End Role="TumblrPostTags" EntitySet="TumblrPostTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbReblogs_tbPost" Association="Tumblr.Model.Store.FK_tbReblogs_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+            <End Role="TumblrReblogs" EntitySet="TumblrReblogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TumblrPost_TumblrBlogs" Association="Tumblr.Model.Store.FK_TumblrPost_TumblrBlogs">
+            <End Role="TumblrBlogs" EntitySet="TumblrBlogs" />
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tAccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="nvarchar(max)" />
+          <Property Name="password" Type="nvarchar(max)" />
+          <Property Name="ConsumerKey" Type="nvarchar(max)" />
+          <Property Name="ConsumerSecret" Type="nvarchar(max)" />
+          <Property Name="systemDrive" Type="nvarchar(max)" />
+          <Property Name="AccountSystemPath" Type="nvarchar(max)" />
+          <Property Name="AccountWebPath" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tBlog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tAccountID" Type="int" Nullable="false" />
+          <Property Name="BlogName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Offset" Type="int" Nullable="false" />
+          <Property Name="Limit" Type="int" Nullable="false" />
+          <Property Name="Total" Type="int" Nullable="false" />
+          <Property Name="Synced" Type="int" Nullable="false" />
+          <Property Name="DoSync" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RequestURL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BlogSystemPath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BlogWebPath" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tDownload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tBlogID" Type="int" />
+          <Property Name="jsPostID" Type="int" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="SystemPath" Type="nvarchar(max)" />
+          <Property Name="WebPath" Type="nvarchar(max)" />
+          <Property Name="Downloaded" Type="nvarchar(max)" />
+          <Property Name="Filename" Type="nvarchar(max)" />
+          <Property Name="PostLinkID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TumblrAltSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tbPhotoId" Type="int" Nullable="false" />
+          <Property Name="width" Type="int" Nullable="false" />
+          <Property Name="height" Type="int" Nullable="false" />
+          <Property Name="url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LocalURL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Downloaded" Type="nvarchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TumblrBlogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="posts" Type="int" Nullable="false" />
+          <Property Name="url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="updated" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="is_nsfw" Type="int" Nullable="false" />
+          <Property Name="ask" Type="int" Nullable="false" />
+          <Property Name="ask_page_title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ask_anon" Type="int" Nullable="false" />
+          <Property Name="submission_page_title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="share_likes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TumblrOriginalSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tbPhotoId" Type="int" Nullable="false" />
+          <Property Name="width" Type="int" Nullable="false" />
+          <Property Name="height" Type="int" Nullable="false" />
+          <Property Name="url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LocalURL" Type="nvarchar(max)" />
+          <Property Name="Downloaded" Type="nvarchar" MaxLength="10" />
+          <Property Name="SystemPath" Type="nvarchar(max)" />
+          <Property Name="DateDownloaded" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TumblrPhotos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="int" Nullable="false" />
+          <Property Name="caption" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ExifId" Type="int" Nullable="false" />
+          <Property Name="Downloaded" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TumblrPlayer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="int" Nullable="false" />
+          <Property Name="width" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="embed_code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TumblrPost">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Blogid" Type="int" Nullable="false" />
+          <Property Name="blog_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="tumblr_id" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="post_url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="slug" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="date" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="timestamp" Type="int" Nullable="false" />
+          <Property Name="state" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="format" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="reblog_key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="short_url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="highlighted" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="note_count" Type="int" Nullable="false" />
+          <Property Name="source_url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="source_title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="caption" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="image_permalink" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="link_url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="summary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="recommended_source" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="recommended_color" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="trail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="video_url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="html5_capable" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="thumbnail_url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="thumbnail_width" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="thumbnail_height" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="duration" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="video_type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Downloaded" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="Deleted" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="Fav" Type="nchar" MaxLength="10" />
+          <Property Name="DateSynced" Type="datetime" />
+          <Property Name="Viewed" Type="nchar" MaxLength="10" />
+          <Property Name="PostLinkID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TumblrPostComments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostid" Type="int" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" Nullable="false" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="email" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TumblrPostOtherMedia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="HDDPath" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TumblrPostTags">
+          <Key>
+            <PropertyRef Name="tbPostID" />
+            <PropertyRef Name="tbTagID" />
+          </Key>
+          <Property Name="tbPostID" Type="int" Nullable="false" />
+          <Property Name="tbTagID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TumblrReblogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="int" Nullable="false" />
+          <Property Name="tree_html" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TumblrTags">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <Association Name="FK_tbAltSize_tbPhotos">
+          <End Role="TumblrPhotos" Type="Tumblr.Model.Store.TumblrPhotos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrAltSize" Type="Tumblr.Model.Store.TumblrAltSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPhotos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TumblrAltSize">
+              <PropertyRef Name="tbPhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbComments_Posts">
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPostComments" Type="Tumblr.Model.Store.TumblrPostComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostComments">
+              <PropertyRef Name="tbPostid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBlog_tAccount">
+          <End Role="tAccount" Type="Tumblr.Model.Store.tAccount" Multiplicity="1" />
+          <End Role="tBlog" Type="Tumblr.Model.Store.tBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tBlog">
+              <PropertyRef Name="tAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbOriginalSize_tbPhotos">
+          <End Role="TumblrPhotos" Type="Tumblr.Model.Store.TumblrPhotos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrOriginalSize" Type="Tumblr.Model.Store.TumblrOriginalSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPhotos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TumblrOriginalSize">
+              <PropertyRef Name="tbPhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPhotos_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPhotos" Type="Tumblr.Model.Store.TumblrPhotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPhotos">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPlayer_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPlayer" Type="Tumblr.Model.Store.TumblrPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPlayer">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPostOtherMedia_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPostOtherMedia" Type="Tumblr.Model.Store.TumblrPostOtherMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostOtherMedia">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPostTags_Posts">
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPostTags" Type="Tumblr.Model.Store.TumblrPostTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostTags">
+              <PropertyRef Name="tbPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPostTags_Tags">
+          <End Role="TumblrTags" Type="Tumblr.Model.Store.TumblrTags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPostTags" Type="Tumblr.Model.Store.TumblrPostTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrTags">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostTags">
+              <PropertyRef Name="tbTagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbReblogs_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrReblogs" Type="Tumblr.Model.Store.TumblrReblogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrReblogs">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TumblrPost_TumblrBlogs">
+          <End Role="TumblrBlogs" Type="Tumblr.Model.Store.TumblrBlogs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrBlogs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TumblrPost">
+              <PropertyRef Name="Blogid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Tumblr.Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TumblrModel" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="tAccounts" EntityType="Tumblr.Model.tAccount" />
+          <EntitySet Name="tBlogs" EntityType="Tumblr.Model.tBlog" />
+          <EntitySet Name="tDownloads" EntityType="Tumblr.Model.tDownload" />
+          <EntitySet Name="TumblrAltSizes" EntityType="Tumblr.Model.TumblrAltSize" />
+          <EntitySet Name="TumblrBlogs" EntityType="Tumblr.Model.TumblrBlog" />
+          <EntitySet Name="TumblrOriginalSizes" EntityType="Tumblr.Model.TumblrOriginalSize" />
+          <EntitySet Name="TumblrPhotos" EntityType="Tumblr.Model.TumblrPhoto" />
+          <EntitySet Name="TumblrPlayers" EntityType="Tumblr.Model.TumblrPlayer" />
+          <EntitySet Name="TumblrPosts" EntityType="Tumblr.Model.TumblrPost" />
+          <EntitySet Name="TumblrPostComments" EntityType="Tumblr.Model.TumblrPostComment" />
+          <EntitySet Name="TumblrPostOtherMedias" EntityType="Tumblr.Model.TumblrPostOtherMedia" />
+          <EntitySet Name="TumblrReblogs" EntityType="Tumblr.Model.TumblrReblog" />
+          <EntitySet Name="TumblrTags" EntityType="Tumblr.Model.TumblrTag" />
+          <AssociationSet Name="FK_tBlog_tAccount" Association="Tumblr.Model.FK_tBlog_tAccount">
+            <End Role="tAccount" EntitySet="tAccounts" />
+            <End Role="tBlog" EntitySet="tBlogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbAltSize_tbPhotos" Association="Tumblr.Model.FK_tbAltSize_tbPhotos">
+            <End Role="TumblrPhotos" EntitySet="TumblrPhotos" />
+            <End Role="TumblrAltSize" EntitySet="TumblrAltSizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TumblrPost_TumblrBlogs" Association="Tumblr.Model.FK_TumblrPost_TumblrBlogs">
+            <End Role="TumblrBlogs" EntitySet="TumblrBlogs" />
+            <End Role="TumblrPost" EntitySet="TumblrPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbOriginalSize_tbPhotos" Association="Tumblr.Model.FK_tbOriginalSize_tbPhotos">
+            <End Role="TumblrPhotos" EntitySet="TumblrPhotos" />
+            <End Role="TumblrOriginalSize" EntitySet="TumblrOriginalSizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPhotos_tbPost" Association="Tumblr.Model.FK_tbPhotos_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPosts" />
+            <End Role="TumblrPhotos" EntitySet="TumblrPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPlayer_tbPost" Association="Tumblr.Model.FK_tbPlayer_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPosts" />
+            <End Role="TumblrPlayer" EntitySet="TumblrPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbComments_Posts" Association="Tumblr.Model.FK_tbComments_Posts">
+            <End Role="TumblrPost" EntitySet="TumblrPosts" />
+            <End Role="TumblrPostComments" EntitySet="TumblrPostComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPostOtherMedia_tbPost" Association="Tumblr.Model.FK_tbPostOtherMedia_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPosts" />
+            <End Role="TumblrPostOtherMedia" EntitySet="TumblrPostOtherMedias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbReblogs_tbPost" Association="Tumblr.Model.FK_tbReblogs_tbPost">
+            <End Role="TumblrPost" EntitySet="TumblrPosts" />
+            <End Role="TumblrReblogs" EntitySet="TumblrReblogs" />
+          </AssociationSet>
+          <AssociationSet Name="TumblrPostTags" Association="Tumblr.Model.TumblrPostTags">
+            <End Role="TumblrPost" EntitySet="TumblrPosts" />
+            <End Role="TumblrTags" EntitySet="TumblrTags" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tAccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="password" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ConsumerKey" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ConsumerSecret" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="systemDrive" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AccountSystemPath" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AccountWebPath" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tBlogs" Relationship="Tumblr.Model.FK_tBlog_tAccount" FromRole="tAccount" ToRole="tBlog" />
+        </EntityType>
+        <EntityType Name="tBlog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tAccountID" Type="Int32" Nullable="false" />
+          <Property Name="BlogName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Offset" Type="Int32" Nullable="false" />
+          <Property Name="Limit" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Int32" Nullable="false" />
+          <Property Name="Synced" Type="Int32" Nullable="false" />
+          <Property Name="DoSync" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RequestURL" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BlogSystemPath" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BlogWebPath" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tAccount" Relationship="Tumblr.Model.FK_tBlog_tAccount" FromRole="tBlog" ToRole="tAccount" />
+        </EntityType>
+        <EntityType Name="tDownload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tBlogID" Type="Int32" />
+          <Property Name="jsPostID" Type="Int32" />
+          <Property Name="URL" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SystemPath" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="WebPath" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Downloaded" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Filename" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PostLinkID" Type="Guid" />
+        </EntityType>
+        <EntityType Name="TumblrAltSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tbPhotoId" Type="Int32" Nullable="false" />
+          <Property Name="width" Type="Int32" Nullable="false" />
+          <Property Name="height" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LocalURL" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Downloaded" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TumblrPhoto" Relationship="Tumblr.Model.FK_tbAltSize_tbPhotos" FromRole="TumblrAltSize" ToRole="TumblrPhotos" />
+        </EntityType>
+        <EntityType Name="TumblrBlog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="posts" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="updated" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="is_nsfw" Type="Int32" Nullable="false" />
+          <Property Name="ask" Type="Int32" Nullable="false" />
+          <Property Name="ask_page_title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ask_anon" Type="Int32" Nullable="false" />
+          <Property Name="submission_page_title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="share_likes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TumblrPosts" Relationship="Tumblr.Model.FK_TumblrPost_TumblrBlogs" FromRole="TumblrBlogs" ToRole="TumblrPost" />
+        </EntityType>
+        <EntityType Name="TumblrOriginalSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tbPhotoId" Type="Int32" Nullable="false" />
+          <Property Name="width" Type="Int32" Nullable="false" />
+          <Property Name="height" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LocalURL" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Downloaded" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="SystemPath" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateDownloaded" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TumblrPhoto" Relationship="Tumblr.Model.FK_tbOriginalSize_tbPhotos" FromRole="TumblrOriginalSize" ToRole="TumblrPhotos" />
+        </EntityType>
+        <EntityType Name="TumblrPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="Int32" Nullable="false" />
+          <Property Name="caption" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ExifId" Type="Int32" Nullable="false" />
+          <Property Name="Downloaded" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TumblrAltSizes" Relationship="Tumblr.Model.FK_tbAltSize_tbPhotos" FromRole="TumblrPhotos" ToRole="TumblrAltSize" />
+          <NavigationProperty Name="TumblrOriginalSizes" Relationship="Tumblr.Model.FK_tbOriginalSize_tbPhotos" FromRole="TumblrPhotos" ToRole="TumblrOriginalSize" />
+          <NavigationProperty Name="TumblrPost" Relationship="Tumblr.Model.FK_tbPhotos_tbPost" FromRole="TumblrPhotos" ToRole="TumblrPost" />
+        </EntityType>
+        <EntityType Name="TumblrPlayer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="Int32" Nullable="false" />
+          <Property Name="width" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="embed_code" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TumblrPost" Relationship="Tumblr.Model.FK_tbPlayer_tbPost" FromRole="TumblrPlayer" ToRole="TumblrPost" />
+        </EntityType>
+        <EntityType Name="TumblrPost">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Blogid" Type="Int32" Nullable="false" />
+          <Property Name="blog_name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="tumblr_id" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="post_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="slug" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="date" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="timestamp" Type="Int32" Nullable="false" />
+          <Property Name="state" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="format" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="reblog_key" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="short_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="highlighted" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="note_count" Type="Int32" Nullable="false" />
+          <Property Name="source_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="source_title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="caption" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="image_permalink" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="link_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="summary" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="recommended_source" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="recommended_color" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="trail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="video_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="html5_capable" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="thumbnail_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="thumbnail_width" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="thumbnail_height" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="duration" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="video_type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Downloaded" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Deleted" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Fav" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="DateSynced" Type="DateTime" Precision="3" />
+          <Property Name="Viewed" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="PostLinkID" Type="Guid" />
+          <NavigationProperty Name="TumblrBlog" Relationship="Tumblr.Model.FK_TumblrPost_TumblrBlogs" FromRole="TumblrPost" ToRole="TumblrBlogs" />
+          <NavigationProperty Name="TumblrPhotos" Relationship="Tumblr.Model.FK_tbPhotos_tbPost" FromRole="TumblrPost" ToRole="TumblrPhotos" />
+          <NavigationProperty Name="TumblrPlayers" Relationship="Tumblr.Model.FK_tbPlayer_tbPost" FromRole="TumblrPost" ToRole="TumblrPlayer" />
+          <NavigationProperty Name="TumblrPostComments" Relationship="Tumblr.Model.FK_tbComments_Posts" FromRole="TumblrPost" ToRole="TumblrPostComments" />
+          <NavigationProperty Name="TumblrPostOtherMedias" Relationship="Tumblr.Model.FK_tbPostOtherMedia_tbPost" FromRole="TumblrPost" ToRole="TumblrPostOtherMedia" />
+          <NavigationProperty Name="TumblrReblogs" Relationship="Tumblr.Model.FK_tbReblogs_tbPost" FromRole="TumblrPost" ToRole="TumblrReblogs" />
+          <NavigationProperty Name="TumblrTags" Relationship="Tumblr.Model.TumblrPostTags" FromRole="TumblrPost" ToRole="TumblrTags" />
+        </EntityType>
+        <EntityType Name="TumblrPostComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostid" Type="Int32" Nullable="false" />
+          <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TumblrPost" Relationship="Tumblr.Model.FK_tbComments_Posts" FromRole="TumblrPostComments" ToRole="TumblrPost" />
+        </EntityType>
+        <EntityType Name="TumblrPostOtherMedia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="HDDPath" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TumblrPost" Relationship="Tumblr.Model.FK_tbPostOtherMedia_tbPost" FromRole="TumblrPostOtherMedia" ToRole="TumblrPost" />
+        </EntityType>
+        <EntityType Name="TumblrReblog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tbPostId" Type="Int32" Nullable="false" />
+          <Property Name="tree_html" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="comment" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TumblrPost" Relationship="Tumblr.Model.FK_tbReblogs_tbPost" FromRole="TumblrReblogs" ToRole="TumblrPost" />
+        </EntityType>
+        <EntityType Name="TumblrTag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TumblrPosts" Relationship="Tumblr.Model.TumblrPostTags" FromRole="TumblrTags" ToRole="TumblrPost" />
+        </EntityType>
+        <Association Name="FK_tBlog_tAccount">
+          <End Role="tAccount" Type="Tumblr.Model.tAccount" Multiplicity="1" />
+          <End Role="tBlog" Type="Tumblr.Model.tBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tBlog">
+              <PropertyRef Name="tAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbAltSize_tbPhotos">
+          <End Role="TumblrPhotos" Type="Tumblr.Model.TumblrPhoto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrAltSize" Type="Tumblr.Model.TumblrAltSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPhotos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TumblrAltSize">
+              <PropertyRef Name="tbPhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TumblrPost_TumblrBlogs">
+          <End Role="TumblrBlogs" Type="Tumblr.Model.TumblrBlog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPost" Type="Tumblr.Model.TumblrPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrBlogs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TumblrPost">
+              <PropertyRef Name="Blogid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbOriginalSize_tbPhotos">
+          <End Role="TumblrPhotos" Type="Tumblr.Model.TumblrPhoto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrOriginalSize" Type="Tumblr.Model.TumblrOriginalSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPhotos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TumblrOriginalSize">
+              <PropertyRef Name="tbPhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPhotos_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPhotos" Type="Tumblr.Model.TumblrPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPhotos">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPlayer_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPlayer" Type="Tumblr.Model.TumblrPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPlayer">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbComments_Posts">
+          <End Role="TumblrPost" Type="Tumblr.Model.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPostComments" Type="Tumblr.Model.TumblrPostComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostComments">
+              <PropertyRef Name="tbPostid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPostOtherMedia_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrPostOtherMedia" Type="Tumblr.Model.TumblrPostOtherMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostOtherMedia">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbReblogs_tbPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.TumblrPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TumblrReblogs" Type="Tumblr.Model.TumblrReblog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrReblogs">
+              <PropertyRef Name="tbPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TumblrPostTags">
+          <End Role="TumblrPost" Type="Tumblr.Model.TumblrPost" Multiplicity="*" />
+          <End Role="TumblrTags" Type="Tumblr.Model.TumblrTag" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TumblrModelStoreContainer" CdmEntityContainer="TumblrModel">
+          <EntitySetMapping Name="tAccounts">
+            <EntityTypeMapping TypeName="Tumblr.Model.tAccount">
+              <MappingFragment StoreEntitySet="tAccount">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="systemDrive" ColumnName="systemDrive" />
+                <ScalarProperty Name="AccountSystemPath" ColumnName="AccountSystemPath" />
+                <ScalarProperty Name="AccountWebPath" ColumnName="AccountWebPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tBlogs">
+            <EntityTypeMapping TypeName="Tumblr.Model.tBlog">
+              <MappingFragment StoreEntitySet="tBlog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tAccountID" ColumnName="tAccountID" />
+                <ScalarProperty Name="BlogName" ColumnName="BlogName" />
+                <ScalarProperty Name="Offset" ColumnName="Offset" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Synced" ColumnName="Synced" />
+                <ScalarProperty Name="DoSync" ColumnName="DoSync" />
+                <ScalarProperty Name="RequestURL" ColumnName="RequestURL" />
+                <ScalarProperty Name="BlogSystemPath" ColumnName="BlogSystemPath" />
+                <ScalarProperty Name="BlogWebPath" ColumnName="BlogWebPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDownloads">
+            <EntityTypeMapping TypeName="Tumblr.Model.tDownload">
+              <MappingFragment StoreEntitySet="tDownload">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tBlogID" ColumnName="tBlogID" />
+                <ScalarProperty Name="jsPostID" ColumnName="jsPostID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="SystemPath" ColumnName="SystemPath" />
+                <ScalarProperty Name="WebPath" ColumnName="WebPath" />
+                <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="PostLinkID" ColumnName="PostLinkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrAltSizes">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrAltSize">
+              <MappingFragment StoreEntitySet="TumblrAltSize">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tbPhotoId" ColumnName="tbPhotoId" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="LocalURL" ColumnName="LocalURL" />
+                <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrBlogs">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrBlog">
+              <MappingFragment StoreEntitySet="TumblrBlogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="posts" ColumnName="posts" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="is_nsfw" ColumnName="is_nsfw" />
+                <ScalarProperty Name="ask" ColumnName="ask" />
+                <ScalarProperty Name="ask_page_title" ColumnName="ask_page_title" />
+                <ScalarProperty Name="ask_anon" ColumnName="ask_anon" />
+                <ScalarProperty Name="submission_page_title" ColumnName="submission_page_title" />
+                <ScalarProperty Name="share_likes" ColumnName="share_likes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrOriginalSizes">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrOriginalSize">
+              <MappingFragment StoreEntitySet="TumblrOriginalSize">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tbPhotoId" ColumnName="tbPhotoId" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="LocalURL" ColumnName="LocalURL" />
+                <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
+                <ScalarProperty Name="SystemPath" ColumnName="SystemPath" />
+                <ScalarProperty Name="DateDownloaded" ColumnName="DateDownloaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrPhotos">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrPhoto">
+              <MappingFragment StoreEntitySet="TumblrPhotos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tbPostId" ColumnName="tbPostId" />
+                <ScalarProperty Name="caption" ColumnName="caption" />
+                <ScalarProperty Name="ExifId" ColumnName="ExifId" />
+                <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrPlayers">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrPlayer">
+              <MappingFragment StoreEntitySet="TumblrPlayer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tbPostId" ColumnName="tbPostId" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="embed_code" ColumnName="embed_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrPosts">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrPost">
+              <MappingFragment StoreEntitySet="TumblrPost">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Blogid" ColumnName="Blogid" />
+                <ScalarProperty Name="blog_name" ColumnName="blog_name" />
+                <ScalarProperty Name="tumblr_id" ColumnName="tumblr_id" />
+                <ScalarProperty Name="post_url" ColumnName="post_url" />
+                <ScalarProperty Name="slug" ColumnName="slug" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="format" ColumnName="format" />
+                <ScalarProperty Name="reblog_key" ColumnName="reblog_key" />
+                <ScalarProperty Name="short_url" ColumnName="short_url" />
+                <ScalarProperty Name="highlighted" ColumnName="highlighted" />
+                <ScalarProperty Name="note_count" ColumnName="note_count" />
+                <ScalarProperty Name="source_url" ColumnName="source_url" />
+                <ScalarProperty Name="source_title" ColumnName="source_title" />
+                <ScalarProperty Name="caption" ColumnName="caption" />
+                <ScalarProperty Name="image_permalink" ColumnName="image_permalink" />
+                <ScalarProperty Name="link_url" ColumnName="link_url" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="recommended_source" ColumnName="recommended_source" />
+                <ScalarProperty Name="recommended_color" ColumnName="recommended_color" />
+                <ScalarProperty Name="trail" ColumnName="trail" />
+                <ScalarProperty Name="video_url" ColumnName="video_url" />
+                <ScalarProperty Name="html5_capable" ColumnName="html5_capable" />
+                <ScalarProperty Name="thumbnail_url" ColumnName="thumbnail_url" />
+                <ScalarProperty Name="thumbnail_width" ColumnName="thumbnail_width" />
+                <ScalarProperty Name="thumbnail_height" ColumnName="thumbnail_height" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="video_type" ColumnName="video_type" />
+                <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Fav" ColumnName="Fav" />
+                <ScalarProperty Name="DateSynced" ColumnName="DateSynced" />
+                <ScalarProperty Name="Viewed" ColumnName="Viewed" />
+                <ScalarProperty Name="PostLinkID" ColumnName="PostLinkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrPostComments">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrPostComment">
+              <MappingFragment StoreEntitySet="TumblrPostComments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tbPostid" ColumnName="tbPostid" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="body" ColumnName="body" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrPostOtherMedias">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrPostOtherMedia">
+              <MappingFragment StoreEntitySet="TumblrPostOtherMedia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tbPostId" ColumnName="tbPostId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="HDDPath" ColumnName="HDDPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrReblogs">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrReblog">
+              <MappingFragment StoreEntitySet="TumblrReblogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tbPostId" ColumnName="tbPostId" />
+                <ScalarProperty Name="tree_html" ColumnName="tree_html" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TumblrTags">
+            <EntityTypeMapping TypeName="Tumblr.Model.TumblrTag">
+              <MappingFragment StoreEntitySet="TumblrTags">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TumblrPostTags" TypeName="Tumblr.Model.TumblrPostTags" StoreEntitySet="TumblrPostTags">
+            <EndProperty Name="TumblrPost">
+              <ScalarProperty Name="id" ColumnName="tbPostID" />
+            </EndProperty>
+            <EndProperty Name="TumblrTags">
+              <ScalarProperty Name="id" ColumnName="tbTagID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
