@@ -302,6 +302,10 @@ namespace TumblrSync
                         resetBlog.Limit = 10;
                         resetBlog.Offset = resetBlog.Total;
                         resetBlog.Synced = 0;
+                        foreach (tDownload dl in Global.mod.tDownloads.Where(ep => ep.tBlogID == resetBlog.id))
+                        {
+                            Global.mod.tDownloads.Remove(dl);
+                        }
                         Global.mod.SaveChanges();
                     }
                 }
@@ -432,5 +436,4 @@ namespace TumblrSync
            return newB;
        }
     }
-
 }
