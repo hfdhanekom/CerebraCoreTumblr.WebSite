@@ -34,10 +34,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cbIntegrated = new System.Windows.Forms.CheckBox();
             this.gbLogin = new System.Windows.Forms.GroupBox();
+            this.txtpass = new System.Windows.Forms.TextBox();
+            this.txtuser = new System.Windows.Forms.TextBox();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.txtDatabase = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
             this.gbLogin.SuspendLayout();
@@ -94,8 +94,8 @@
             // 
             // gbLogin
             // 
-            this.gbLogin.Controls.Add(this.textBox4);
-            this.gbLogin.Controls.Add(this.textBox3);
+            this.gbLogin.Controls.Add(this.txtpass);
+            this.gbLogin.Controls.Add(this.txtuser);
             this.gbLogin.Controls.Add(this.label3);
             this.gbLogin.Controls.Add(this.label4);
             this.gbLogin.Location = new System.Drawing.Point(16, 104);
@@ -105,6 +105,20 @@
             this.gbLogin.TabStop = false;
             this.gbLogin.Text = "Login Details";
             this.gbLogin.Visible = false;
+            // 
+            // txtpass
+            // 
+            this.txtpass.Location = new System.Drawing.Point(84, 63);
+            this.txtpass.Name = "txtpass";
+            this.txtpass.Size = new System.Drawing.Size(183, 20);
+            this.txtpass.TabIndex = 5;
+            // 
+            // txtuser
+            // 
+            this.txtuser.Location = new System.Drawing.Point(84, 27);
+            this.txtuser.Name = "txtuser";
+            this.txtuser.Size = new System.Drawing.Size(183, 20);
+            this.txtuser.TabIndex = 4;
             // 
             // txtServer
             // 
@@ -119,20 +133,6 @@
             this.txtDatabase.Name = "txtDatabase";
             this.txtDatabase.Size = new System.Drawing.Size(185, 20);
             this.txtDatabase.TabIndex = 7;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(84, 27);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(183, 20);
-            this.textBox3.TabIndex = 4;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(84, 63);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(183, 20);
-            this.textBox4.TabIndex = 5;
             // 
             // btnSave
             // 
@@ -184,8 +184,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cbIntegrated;
         private System.Windows.Forms.GroupBox gbLogin;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtpass;
+        private System.Windows.Forms.TextBox txtuser;
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.TextBox txtDatabase;
         private System.Windows.Forms.Button btnSave;

@@ -154,10 +154,6 @@ namespace TumblrSync
                 }
                 UndoCalculate();
             }
-            catch
-            {
-                UndoCalculate();
-            }
         }
     }
 }

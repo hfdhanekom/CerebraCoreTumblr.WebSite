@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Sql;
+using System.Data.SqlClient;
 
 namespace TumblrSync
 {
@@ -72,12 +74,44 @@ namespace TumblrSync
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            TumblrModel mod = new TumblrModel();
+            Server = txtServer.Text;
+            Database = txtDatabase.Text;
+            Integrated = cbIntegrated.Checked;
+            User = txtuser.Text;
+            Pass = txtpass.Text;
+
+            var selectedDb = new TumblrModel();
+
+            if (Integrated)
+            {
+                selectedDb.ChangeDatabase
+                    (
+                        initialCatalog: Database,
+                    //userId: "hfdhanekom",
+                    //password: "nomoresecrets",
+                        dataSource: Server // could be ip address 120.273.435.167 etc
+                        , integratedSecuity: Integrated
+                    );
+            }
+            else
+            {
+                selectedDb.ChangeDatabase
+                   (
+                       initialCatalog: Database,
+                        userId: "hfdhanekom",
+                        password: "nomoresecrets",
+                       dataSource: Server // could be ip address 120.273.435.167 etc
+                       , integratedSecuity: false
+                   );
+
+            }
+
             try
             {
-                mod.Database.Connection.Open();
-                mod.Database.Connection.Close();
+                selectedDb.Database.Connection.Open();
+                selectedDb.Database.Connection.Close();
                 MessageBox.Show("Connection was Succesful.");
+                Global.mod = selectedDb;
             }
             catch
             {

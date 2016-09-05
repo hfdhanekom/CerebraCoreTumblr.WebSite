@@ -11,15 +11,19 @@ using System.Data.Entity.Validation;
 using System.Configuration;
 using System.Windows.Forms;
 
+
 namespace TumblrSync
 {
     class Program
     {
         static tBlog SyncingBlog;
         static tAccount CurrentAccount;
-        static string drive;
+        static string drive = ConfigurationManager.AppSettings["SysDir"];
         static string AccountFolder;
 
+        static bool Noted = false;
+        static bool exit = false;
+        static bool DoSync = false;
 
         static void Main(string[] args)
         {
@@ -30,30 +34,43 @@ namespace TumblrSync
             Console.WriteLine("************* 2016 ***************");
             Console.WriteLine("**********************************");
             
+            if (InitialiseDB())
+            {
+                Noted = false;
+                exit = false;
+                DoSync = false;
+            }
+            else
+            {
+                exit = true;
+                DoSync = false;
+            }
 
+            while (!exit)
+            {
+                if (!DoSync)
+                    ShowMenue();
+                GO();
+            }
 
-            drive = ConfigurationManager.AppSettings["SysDir"];
-            bool Noted = false;
-            bool exit = false;
-            bool DoSync = false;
+            Console.WriteLine("Goodbye.....");
+        }
 
+        static bool InitialiseDB()
+        {
             do
             {
                 Console.WriteLine("Checking Database Connection...Please wait...");
                 if (Global.DBConnected)
                 {
                     Console.WriteLine("Connected to Database.");
-                    exit = false;
-                    DoSync = false;
-                    Noted = false;
-                    break;
+                    return true;
                 }
                 else
                 {
                     if (MessageBox.Show("Connecting to Database Failed: Would you like to Exit?", "Error", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        exit = true;
-                        break;
+                        return false;
                     }
                     else
                     {
@@ -62,34 +79,25 @@ namespace TumblrSync
                     }
                 }
             } while (true);
+        }
 
-
-           
-
-            
-            while (!exit)
+        static void GO()
+        {
+            try
             {
-                try
+                CurrentAccount = Global.mod.tAccounts.Where(ep => ep.id == 2).FirstOrDefault();
+                if (CurrentAccount != null)
                 {
-                    CurrentAccount = Global.mod.tAccounts.Where(ep => ep.id == 1).FirstOrDefault();
                     CurrentAccount.systemDrive = drive;
                     CurrentAccount.AccountSystemPath = drive + "\\" + CurrentAccount.username;
                     AccountFolder = CurrentAccount.AccountSystemPath;
                     SyncingBlog = Global.mod.tBlogs.Where(ep => ep.DoSync == "true").FirstOrDefault();
 
-                    if (!Noted)
+                    if (!Noted && SyncingBlog == null)
                     {
-                        Console.WriteLine("Commands Avalible");
-                        Console.WriteLine(" ");
-                        Console.WriteLine(" Start     - Starts the sync.");
-                        Console.WriteLine(" Stop      - Stops the sync.");
-                        Console.WriteLine(" Exit      - Exits the application.");
-                        Console.WriteLine(" Config    - Opens the configuration screen.");
-                        Console.WriteLine(" Add       - [add,[blogname]] adds a new blog for syncing.");
-                        Console.WriteLine(" chkupdate - Checks if any of the blogs have updates and if so it setts the do sync to true.");
-                        Console.WriteLine("");
-                        Console.WriteLine("***********************************");
-                        Console.WriteLine("What would you like to do?");
+                        ShowMenue();
+                        Noted = true;
+                        //add,blog,gayillustrations
                     }
 
                     if (DoSync)
@@ -100,10 +108,11 @@ namespace TumblrSync
                         }
                         else
                         {
+                            Noted = false;
                             if (!Noted)
                             {
                                 Console.WriteLine("No Blog to Sync");
-                                Noted = true;
+
                             }
                         }
                     }
@@ -111,84 +120,58 @@ namespace TumblrSync
                     if (Console.KeyAvailable)
                     {
                         String x = Console.ReadLine();
-                        string[] xarray = x.Split(',');
-                        if (xarray[0].ToLower() == "add")
-                        {
-                            tBlog newBlog = Global.newBlog(Global.ToJson(xarray[1], CurrentAccount.ConsumerKey, 1, 1), CurrentAccount);
-                            if (newBlog.id == -1)
-                            {
-                                Global.mod.tBlogs.Add(newBlog);
-                                Global.mod.SaveChanges();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Blog Already exists.");
-                            }
-                        }
-                        else if (xarray[0].ToLower() == "exit")
-                        {
-                            exit = true;
-                        }
-                        else if (xarray[0].ToLower() == "start")
-                        {
-                            DoSync = true;
-                            Console.WriteLine("Sync Started");
-                        }
-                        else if (xarray[0].ToLower() == "stop")
-                        {
-                            DoSync = false;
-                            Console.WriteLine("Sync Stoped");
-                        }
-                        else if (xarray[0].ToLower() == "config")
-                        {
-                            frmConfiguration configure = new frmConfiguration();
-                            configure.ShowDialog();
-                            Console.WriteLine("Configuration Saved");
-                        }
-                        else if (xarray[0].ToLower() == "chkupdate")
-                        {
-                            foreach (tBlog tb in Global.mod.tBlogs.Where(ep => ep.DoSync == "false" && ep.Synced > 0))
-                            {
-                                jsRootObject upd = Global.ToJson(tb.BlogName, CurrentAccount.ConsumerKey, 1, 1);
-                                if (tb.Total != upd.response.blog.posts)
-                                {
-                                    tb.Total = upd.response.blog.posts;
-                                    tb.Offset = tb.Total - tb.Synced;
-                                    tb.DoSync = "true";
-                                    if (tb.Offset >= 10)
-                                    {
-                                        tb.Limit = 10;
-                                    }
-                                    else
-                                    {
-                                        tb.Limit = tb.Offset;
-                                    }
-
-                                    Global.mod.SaveChanges();
-                                }
-
-                            }
-                            Console.WriteLine("Check Done");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Unknown Command");
-                        }
+                        processCMD(x);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    if (MessageBox.Show(ex.Message + ": Would you like to Exit?", "Error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        break;
-
-                    frmConfiguration configure = new frmConfiguration();
-                    configure.ShowDialog();
+                    if (!Noted)
+                    {
+                        Console.WriteLine("No Tumblr Accounts Found.");
+                        ShowMenue();
+                        Noted = false;
+                    }
                 }
             }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+            }
+            //catch (DBUpdateException e)
+            //{
+            //    foreach (var eve in e.EntityValidationErrors)
+            //    {
+            //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
+            //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+            //                ve.PropertyName, ve.ErrorMessage);
+            //        }
+            //    }
+            //}
+            catch (Exception ex)
+            {
+                if (MessageBox.Show(ex.Message + ": Would you like to Exit?", "Error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    exit = true;
+                    return;
+                }
 
+                frmConfiguration configure = new frmConfiguration();
+                configure.ShowDialog();
+            }
+            
         }
-
-
 
         static void Process(tBlog blog)
         {
@@ -208,24 +191,152 @@ namespace TumblrSync
             }
         }
 
-        
+        static void ShowMenue()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Commands Avalible");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine(" Start     - Starts the sync.");
+            Console.WriteLine(" Stop      - Stops the sync.");
+            Console.WriteLine(" Exit      - Exits the application.");
+            Console.WriteLine(" Config    - Opens the configuration screen.");
+            Console.WriteLine(" Add       - [add,blog,[blogname]] adds a new blog for syncing.");
+            Console.WriteLine(" Add       - [add,acc] adds a new blog for syncing.");
+            Console.WriteLine(" List      - list,blog lists all blogs for account.");
+            Console.WriteLine(" Reset     - reset,blog,[blogname]");
+            Console.WriteLine(" CMD       - Displays this.");
+            Console.WriteLine(" chkupdate - Checks if any of the blogs have updates and if so it setts the do sync to true.");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("What would you like to do?");
+            string x = Console.ReadLine();
+            processCMD(x);
+        }
+
+        static void processCMD(String input)
+        {
+            string[] xarray = input.Split(',');
+            if (xarray[0].ToLower() == "cmd")
+            {
+                ShowMenue();
+            }
+            else if (xarray[0].ToLower() == "add")
+            {
+                if (xarray[1].ToLower() == "blog" && CurrentAccount != null)
+                {
+                    tBlog newBlog = Global.newBlog(Global.ToJson(xarray[2], CurrentAccount.ConsumerKey, 1, 1), CurrentAccount);
+                    if (newBlog.id == -1)
+                    {
+                        Global.mod.tBlogs.Add(newBlog);
+                        Global.mod.SaveChanges();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Blog Already exists.");
+                    }
+                }
+                else if (xarray[1].ToLower() == "acc")
+                {
+                    frmAccount acc = new frmAccount();
+
+                    if (acc.ShowDialog() == DialogResult.OK)
+                    {
+                        Global.mod.tAccounts.Add(acc.newAcc);
+                        Global.mod.SaveChanges();
+                    }
+                }
+            }
+            else if (xarray[0].ToLower() == "list")
+            {
+                if (xarray[1].ToLower() == "blog")
+                {
+                    if (CurrentAccount != null)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("Blogs for:{0}",CurrentAccount.username);
+                        Console.WriteLine("-------------------------------------");
+                        int Counterxx = 0;
+                        foreach (tBlog tb in CurrentAccount.tBlogs)
+                        {
+                            Console.WriteLine("{0} Blogname:{1}, DoSync:{2}, Total:{3}, Synced:{4}, CurrentlyAt:{5} ",Counterxx,tb.BlogName,tb.DoSync,tb.Total,tb.Synced,tb.Offset);
+                            Counterxx++;
+                        }
+                        Console.WriteLine("-------------------------------------");
+                    }
+                }
+            }
+            else if (xarray[0].ToLower() == "exit")
+            {
+                exit = true;
+            }
+            else if (xarray[0].ToLower() == "start")
+            {
+                DoSync = true;
+                Console.WriteLine("Sync Started");
+            }
+            else if (xarray[0].ToLower() == "stop")
+            {
+                DoSync = false;
+                Console.WriteLine("Sync Stoped");
+            }
+            else if (xarray[0].ToLower() == "config")
+            {
+                frmConfiguration configure = new frmConfiguration();
+                configure.ShowDialog();
+                Console.WriteLine("Configuration Saved");
+            }
+            else if (xarray[0].ToLower() == "reset")
+            {
+                if (xarray[1].ToLower() == "blog")
+                {
+                    String Blogx = xarray[2];
+                    tBlog resetBlog = Global.mod.tBlogs.Where(ep => ep.BlogName == Blogx).First();
+                    if (resetBlog != null)
+                    {
+
+                        TumblrBlog remBlog = Global.mod.TumblrBlogs.Where(ep => ep.name == resetBlog.BlogName).First();
+                        if (remBlog != null)
+                        {
+                            Global.mod.TumblrBlogs.Remove(remBlog);
+                        }
+                        resetBlog.DoSync = "true";
+                        resetBlog.Limit = 10;
+                        resetBlog.Offset = resetBlog.Total;
+                        resetBlog.Synced = 0;
+                        Global.mod.SaveChanges();
+                    }
+                }
+            }
+            else if (xarray[0].ToLower() == "chkupdate")
+            {
+                foreach (tBlog tb in Global.mod.tBlogs.Where(ep => ep.DoSync == "false" && ep.Synced > 0))
+                {
+                    jsRootObject upd = Global.ToJson(tb.BlogName, CurrentAccount.ConsumerKey, 1, 1);
+                    if (tb.Total != upd.response.blog.posts)
+                    {
+                        tb.Total = upd.response.blog.posts;
+                        tb.Offset = tb.Total - tb.Synced;
+                        tb.DoSync = "true";
+                        if (tb.Offset >= 10)
+                        {
+                            tb.Limit = 10;
+                        }
+                        else
+                        {
+                            tb.Limit = tb.Offset;
+                        }
+
+                        Global.mod.SaveChanges();
+                    }
+
+                }
+                Console.WriteLine("Check Done");
+            }
+            else
+            {
+                Console.WriteLine("Unknown Command");
+            }
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     static class Global
     {
@@ -233,6 +344,7 @@ namespace TumblrSync
 
        public static Boolean DBConnected
        {
+          
            get
            {
                try
@@ -304,7 +416,7 @@ namespace TumblrSync
        public static tBlog newBlog(jsRootObject jsobj, tAccount currentaccount)
        {
            tBlog newB = mod.tBlogs.Where(ep => ep.BlogName == jsobj.response.blog.name).FirstOrDefault() ?? new tBlog { id = -1 };
-           if (newB.id > -1)
+           if (newB.id == -1)
            {
                newB.BlogName = jsobj.response.blog.name;
                newB.DoSync = "true";

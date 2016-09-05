@@ -15,7 +15,7 @@
           <EntitySet Name="TumblrPhotos" EntityType="Tumblr.Model.Store.TumblrPhotos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TumblrPlayer" EntityType="Tumblr.Model.Store.TumblrPlayer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TumblrPost" EntityType="Tumblr.Model.Store.TumblrPost" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TumblrPostComments" EntityType="Tumblr.Model.Store.TumblrPostComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TumblrPostComment" EntityType="Tumblr.Model.Store.TumblrPostComment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TumblrPostOtherMedia" EntityType="Tumblr.Model.Store.TumblrPostOtherMedia" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TumblrPostTags" EntityType="Tumblr.Model.Store.TumblrPostTags" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TumblrReblogs" EntityType="Tumblr.Model.Store.TumblrReblogs" store:Type="Tables" Schema="dbo" />
@@ -26,7 +26,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_tbComments_Posts" Association="Tumblr.Model.Store.FK_tbComments_Posts">
             <End Role="TumblrPost" EntitySet="TumblrPost" />
-            <End Role="TumblrPostComments" EntitySet="TumblrPostComments" />
+            <End Role="TumblrPostComment" EntitySet="TumblrPostComment" />
           </AssociationSet>
           <AssociationSet Name="FK_tBlog_tAccount" Association="Tumblr.Model.Store.FK_tBlog_tAccount">
             <End Role="tAccount" EntitySet="tAccount" />
@@ -48,14 +48,6 @@
             <End Role="TumblrPost" EntitySet="TumblrPost" />
             <End Role="TumblrPostOtherMedia" EntitySet="TumblrPostOtherMedia" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbPostTags_Posts" Association="Tumblr.Model.Store.FK_tbPostTags_Posts">
-            <End Role="TumblrPost" EntitySet="TumblrPost" />
-            <End Role="TumblrPostTags" EntitySet="TumblrPostTags" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbPostTags_Tags" Association="Tumblr.Model.Store.FK_tbPostTags_Tags">
-            <End Role="TumblrTags" EntitySet="TumblrTags" />
-            <End Role="TumblrPostTags" EntitySet="TumblrPostTags" />
-          </AssociationSet>
           <AssociationSet Name="FK_tbReblogs_tbPost" Association="Tumblr.Model.Store.FK_tbReblogs_tbPost">
             <End Role="TumblrPost" EntitySet="TumblrPost" />
             <End Role="TumblrReblogs" EntitySet="TumblrReblogs" />
@@ -63,6 +55,14 @@
           <AssociationSet Name="FK_TumblrPost_TumblrBlogs" Association="Tumblr.Model.Store.FK_TumblrPost_TumblrBlogs">
             <End Role="TumblrBlogs" EntitySet="TumblrBlogs" />
             <End Role="TumblrPost" EntitySet="TumblrPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TumblrPostTags_TumblrPost" Association="Tumblr.Model.Store.FK_TumblrPostTags_TumblrPost">
+            <End Role="TumblrPost" EntitySet="TumblrPost" />
+            <End Role="TumblrPostTags" EntitySet="TumblrPostTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TumblrPostTags_TumblrTag" Association="Tumblr.Model.Store.FK_TumblrPostTags_TumblrTag">
+            <End Role="TumblrTags" EntitySet="TumblrTags" />
+            <End Role="TumblrPostTags" EntitySet="TumblrPostTags" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tAccount">
@@ -101,11 +101,11 @@
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="tBlogID" Type="int" />
           <Property Name="jsPostID" Type="int" />
-          <Property Name="URL" Type="text" />
-          <Property Name="SystemPath" Type="text" />
-          <Property Name="WebPath" Type="text" />
-          <Property Name="Downloaded" Type="text" />
-          <Property Name="Filename" Type="text" />
+          <Property Name="URL" Type="varchar(max)" />
+          <Property Name="SystemPath" Type="varchar(max)" />
+          <Property Name="WebPath" Type="varchar(max)" />
+          <Property Name="Downloaded" Type="varchar(max)" />
+          <Property Name="Filename" Type="varchar(max)" />
           <Property Name="PostLinkID" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="TumblrAltSize">
@@ -213,7 +213,7 @@
           <Property Name="Viewed" Type="nchar" MaxLength="10" />
           <Property Name="PostLinkID" Type="uniqueidentifier" />
         </EntityType>
-        <EntityType Name="TumblrPostComments">
+        <EntityType Name="TumblrPostComment">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -235,11 +235,11 @@
         </EntityType>
         <EntityType Name="TumblrPostTags">
           <Key>
-            <PropertyRef Name="tbPostID" />
-            <PropertyRef Name="tbTagID" />
+            <PropertyRef Name="TumblrPosts_id" />
+            <PropertyRef Name="TumblrTags_id" />
           </Key>
-          <Property Name="tbPostID" Type="int" Nullable="false" />
-          <Property Name="tbTagID" Type="int" Nullable="false" />
+          <Property Name="TumblrPosts_id" Type="int" Nullable="false" />
+          <Property Name="TumblrTags_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TumblrReblogs">
           <Key>
@@ -275,12 +275,12 @@
           <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="TumblrPostComments" Type="Tumblr.Model.Store.TumblrPostComments" Multiplicity="*" />
+          <End Role="TumblrPostComment" Type="Tumblr.Model.Store.TumblrPostComment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TumblrPost">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="TumblrPostComments">
+            <Dependent Role="TumblrPostComment">
               <PropertyRef Name="tbPostid" />
             </Dependent>
           </ReferentialConstraint>
@@ -353,34 +353,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbPostTags_Posts">
-          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="TumblrPostTags" Type="Tumblr.Model.Store.TumblrPostTags" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TumblrPost">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TumblrPostTags">
-              <PropertyRef Name="tbPostID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbPostTags_Tags">
-          <End Role="TumblrTags" Type="Tumblr.Model.Store.TumblrTags" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="TumblrPostTags" Type="Tumblr.Model.Store.TumblrPostTags" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TumblrTags">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TumblrPostTags">
-              <PropertyRef Name="tbTagID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tbReblogs_tbPost">
           <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -406,6 +378,30 @@
             </Principal>
             <Dependent Role="TumblrPost">
               <PropertyRef Name="Blogid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TumblrPostTags_TumblrPost">
+          <End Role="TumblrPost" Type="Tumblr.Model.Store.TumblrPost" Multiplicity="1" />
+          <End Role="TumblrPostTags" Type="Tumblr.Model.Store.TumblrPostTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrPost">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostTags">
+              <PropertyRef Name="TumblrPosts_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TumblrPostTags_TumblrTag">
+          <End Role="TumblrTags" Type="Tumblr.Model.Store.TumblrTags" Multiplicity="1" />
+          <End Role="TumblrPostTags" Type="Tumblr.Model.Store.TumblrPostTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TumblrTags">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TumblrPostTags">
+              <PropertyRef Name="TumblrTags_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -965,7 +961,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="TumblrPostComments">
             <EntityTypeMapping TypeName="Tumblr.Model.TumblrPostComment">
-              <MappingFragment StoreEntitySet="TumblrPostComments">
+              <MappingFragment StoreEntitySet="TumblrPostComment">
                 <ScalarProperty Name="body" ColumnName="body" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1005,10 +1001,10 @@
           </EntitySetMapping>
           <AssociationSetMapping Name="TumblrPostTags" TypeName="Tumblr.Model.TumblrPostTags" StoreEntitySet="TumblrPostTags">
             <EndProperty Name="TumblrTag">
-              <ScalarProperty Name="id" ColumnName="tbTagID" />
+              <ScalarProperty Name="id" ColumnName="TumblrTags_id" />
             </EndProperty>
             <EndProperty Name="TumblrPost">
-              <ScalarProperty Name="id" ColumnName="tbPostID" />
+              <ScalarProperty Name="id" ColumnName="TumblrPosts_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
@@ -1033,29 +1029,29 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram DiagramId="e06ec812d0bf4138a17dc16ea658609b" Name="Diagram1">
-        <EntityTypeShape EntityType="Tumblr.Model.tAccount" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.tBlog" Width="1.5" PointX="12" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.tDownload" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrAltSize" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrBlog" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrOriginalSize" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrPhoto" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrPlayer" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrPost" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrPostComment" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrPostOtherMedia" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrReblog" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tumblr.Model.TumblrTag" Width="1.5" PointX="5.25" PointY="20.125" IsExpanded="true" />
-        <AssociationConnector Association="Tumblr.Model.FK_tBlog_tAccount" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_tbAltSize_tbPhotos" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_TumblrPost_TumblrBlogs" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_tbOriginalSize_tbPhotos" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_tbPhotos_tbPost" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_tbPlayer_tbPost" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_tbComments_Posts" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_tbPostOtherMedia_tbPost" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.FK_tbReblogs_tbPost" ManuallyRouted="false" />
-        <AssociationConnector Association="Tumblr.Model.TumblrPostTags" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Tumblr.Model.tAccount" Width="1.5" PointX="6.0787965758139251" PointY="7.3972694014186366" />
+        <EntityTypeShape EntityType="Tumblr.Model.tBlog" Width="1.5" PointX="9.7404732395617621" PointY="20.255129078521918" />
+        <EntityTypeShape EntityType="Tumblr.Model.tDownload" Width="1.5" PointX="2.0794942481813461" PointY="12.277196234221195" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrAltSize" Width="1.5" PointX="11.445884193967043" PointY="21.766560728553014" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrBlog" Width="1.5" PointX="8.53436183023004" PointY="19.932745167954241" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrOriginalSize" Width="1.5" PointX="2.3405373964181808" PointY="10.343064804721188" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPhoto" Width="1.5" PointX="3.3574237261700555" PointY="21.40364238126373" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPlayer" Width="1.5" PointX="1.0441358690355607" PointY="24.87862677540566" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPost" Width="1.5" PointX="1.5915760815104361" PointY="13.288505619991806" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPostComment" Width="1.5" PointX="11.137726541207044" PointY="3.3108411893764704" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrPostOtherMedia" Width="1.5" PointX="11.620848476710194" PointY="18.561669388116183" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrReblog" Width="1.5" PointX="9.18684126491977" PointY="26.433545869977003" />
+        <EntityTypeShape EntityType="Tumblr.Model.TumblrTag" Width="1.5" PointX="2.9612957979372219" PointY="17.753347598832729" />
+        <AssociationConnector Association="Tumblr.Model.FK_tBlog_tAccount" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbAltSize_tbPhotos" />
+        <AssociationConnector Association="Tumblr.Model.FK_TumblrPost_TumblrBlogs" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbOriginalSize_tbPhotos" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbPhotos_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbPlayer_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbComments_Posts" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbPostOtherMedia_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.FK_tbReblogs_tbPost" />
+        <AssociationConnector Association="Tumblr.Model.TumblrPostTags" />
       </Diagram>
     </Diagrams>
   </Designer>
