@@ -13,7 +13,7 @@ namespace CerebraCoreTumblr.DataAccess
 {
     public class Global
     {
-       // public static TumblrModel mod = new TumblrModel();
+        //public static TumblrModel mod = new TumblrModel();
 
         public static jsRootObject ToJson(string BlogName, string ConsumerKey, int Limit, int Offset)
         {
@@ -60,8 +60,6 @@ namespace CerebraCoreTumblr.DataAccess
             ProString = ProString.Substring(0, ProString.Length - 1);
             return ProString;
         }
-
-
 
         public static TumblrTag getTag(String name)
         {
